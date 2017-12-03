@@ -21,6 +21,8 @@
 		19D0E8D91FD3633500BE4725 /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D0E8D81FD3633500BE4725 /* ContainerVC.swift */; };
 		19D0E8DC1FD3660000BE4725 /* CenterVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D0E8DB1FD3660000BE4725 /* CenterVCDelegate.swift */; };
 		19D0E8DF1FD3793200BE4725 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D0E8DE1FD3793200BE4725 /* UIViewExt.swift */; };
+		19D0E8E11FD3904C00BE4725 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D0E8E01FD3904C00BE4725 /* LoginVC.swift */; };
+		19D0E8E31FD3928900BE4725 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D0E8E21FD3928900BE4725 /* RoundedTextField.swift */; };
 		FE48C2F893BC0C9F88528F76 /* Pods_ubghiker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC8D7F44A032CDAF17597D8 /* Pods_ubghiker.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,8 @@
 		19D0E8D81FD3633500BE4725 /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
 		19D0E8DB1FD3660000BE4725 /* CenterVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterVCDelegate.swift; sourceTree = "<group>"; };
 		19D0E8DE1FD3793200BE4725 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
+		19D0E8E01FD3904C00BE4725 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		19D0E8E21FD3928900BE4725 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		2AC8D7F44A032CDAF17597D8 /* Pods_ubghiker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ubghiker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B09437CECD2E2C7B0964D90 /* Pods-ubghiker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ubghiker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ubghiker/Pods-ubghiker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +103,7 @@
 				19BC38281FD3001E00E3665E /* HomeVC.swift */,
 				19D0E8D61FD362A100BE4725 /* LeftSidePanelVC.swift */,
 				19D0E8D81FD3633500BE4725 /* ContainerVC.swift */,
+				19D0E8E01FD3904C00BE4725 /* LoginVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -111,6 +116,7 @@
 				19D0E8D01FD352E700BE4725 /* RoundedShadowView.swift */,
 				19D0E8D21FD3540100BE4725 /* CircleView.swift */,
 				19D0E8D41FD3565D00BE4725 /* RoundedShadowButton.swift */,
+				19D0E8E21FD3928900BE4725 /* RoundedTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -280,6 +286,8 @@
 			files = (
 				19D0E8DC1FD3660000BE4725 /* CenterVCDelegate.swift in Sources */,
 				19D0E8D51FD3565D00BE4725 /* RoundedShadowButton.swift in Sources */,
+				19D0E8E11FD3904C00BE4725 /* LoginVC.swift in Sources */,
+				19D0E8E31FD3928900BE4725 /* RoundedTextField.swift in Sources */,
 				19D0E8D71FD362A100BE4725 /* LeftSidePanelVC.swift in Sources */,
 				19D0E8D31FD3540100BE4725 /* CircleView.swift in Sources */,
 				19D0E8D91FD3633500BE4725 /* ContainerVC.swift in Sources */,
