@@ -25,6 +25,8 @@
 		19D0E8E31FD3928900BE4725 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D0E8E21FD3928900BE4725 /* RoundedTextField.swift */; };
 		19D0E8E51FD3A3E100BE4725 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19D0E8E41FD3A3CB00BE4725 /* GoogleService-Info.plist */; };
 		19D0E8E81FD3A5EF00BE4725 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D0E8E71FD3A5EF00BE4725 /* DataService.swift */; };
+		19D0E8EA1FD4784100BE4725 /* UpdateLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D0E8E91FD4784100BE4725 /* UpdateLocationService.swift */; };
+		19D0E8EC1FD47D2200BE4725 /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D0E8EB1FD47D2200BE4725 /* DriverAnnotation.swift */; };
 		FE48C2F893BC0C9F88528F76 /* Pods_ubghiker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC8D7F44A032CDAF17597D8 /* Pods_ubghiker.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,8 @@
 		19D0E8E21FD3928900BE4725 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		19D0E8E41FD3A3CB00BE4725 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		19D0E8E71FD3A5EF00BE4725 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		19D0E8E91FD4784100BE4725 /* UpdateLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLocationService.swift; sourceTree = "<group>"; };
+		19D0E8EB1FD47D2200BE4725 /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
 		2AC8D7F44A032CDAF17597D8 /* Pods_ubghiker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ubghiker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B09437CECD2E2C7B0964D90 /* Pods-ubghiker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ubghiker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ubghiker/Pods-ubghiker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +127,7 @@
 				19D0E8D21FD3540100BE4725 /* CircleView.swift */,
 				19D0E8D41FD3565D00BE4725 /* RoundedShadowButton.swift */,
 				19D0E8E21FD3928900BE4725 /* RoundedTextField.swift */,
+				19D0E8EB1FD47D2200BE4725 /* DriverAnnotation.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				19D0E8E71FD3A5EF00BE4725 /* DataService.swift */,
+				19D0E8E91FD4784100BE4725 /* UpdateLocationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -299,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19D0E8EA1FD4784100BE4725 /* UpdateLocationService.swift in Sources */,
 				19D0E8DC1FD3660000BE4725 /* CenterVCDelegate.swift in Sources */,
 				19D0E8E81FD3A5EF00BE4725 /* DataService.swift in Sources */,
 				19D0E8D51FD3565D00BE4725 /* RoundedShadowButton.swift in Sources */,
@@ -306,6 +313,7 @@
 				19D0E8E31FD3928900BE4725 /* RoundedTextField.swift in Sources */,
 				19D0E8D71FD362A100BE4725 /* LeftSidePanelVC.swift in Sources */,
 				19D0E8D31FD3540100BE4725 /* CircleView.swift in Sources */,
+				19D0E8EC1FD47D2200BE4725 /* DriverAnnotation.swift in Sources */,
 				19D0E8D91FD3633500BE4725 /* ContainerVC.swift in Sources */,
 				19D0E8DF1FD3793200BE4725 /* UIViewExt.swift in Sources */,
 				19BC38291FD3001E00E3665E /* HomeVC.swift in Sources */,

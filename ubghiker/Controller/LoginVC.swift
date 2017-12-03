@@ -80,7 +80,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 self.dismiss(animated: true, completion: nil)
             } else {
                 self.checkAuthError(withInfo: error)
-                if isNewUser {
+                if self.isNewUser {
                     Auth.auth().createUser(withEmail: email, password: pass, completion: { (user, error) in
                         if error != nil {
                             self.checkAuthError(withInfo: error)
