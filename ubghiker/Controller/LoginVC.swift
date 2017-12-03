@@ -16,7 +16,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var authBtn: RoundedShadowButton!
     
-    var isNewUser = false
+    private var isNewUser = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

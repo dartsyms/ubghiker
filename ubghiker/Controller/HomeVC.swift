@@ -33,7 +33,7 @@ class HomeVC: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func actionBtnWasPressed(_ sender: UIButton) {
-        actionBtn.animateButton(shouldLoad: true, withMessage: "REQUEST RIDE")
+        actionBtn.animateButton(shouldLoad: true, withMessage: nil)
     }
     
     @IBAction func menuBtnWasPressed(_ sender: UIButton) {
