@@ -54,6 +54,30 @@ class HomeVC: UIViewController, Alertable {
         revealingSplashView.animationType = SplashAnimationType.heartBeat
         revealingSplashView.startAnimation()
         revealingSplashView.heartAttack = true
+        
+        UpdateLocationService.instance.observeTrips { (tripDict) in
+            if let tripDict = tripDict {
+                let pickupCoordinateArray = tripDict["pickupCoordinate"] as! NSArray
+                let tripKey = tripDict["passengerKey"] as! String
+                let acceptanceStatus = tripDict["tripIsAccepted"] as! Bool
+                
+                if !acceptanceStatus {
+                    DataService.instance.driverIsAvailable(key: self.currentUserId!, handler: { (available) in
+                        if let available = available {
+                            if available {
+                                let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                                let pickupVC = storyboard.instantiateViewController(withIdentifier: "PickupVC") as? PickupVC
+                                pickupVC?.initData(coordinate: CLLocationCoordinate2D(latitude: pickupCoordinateArray[0] as! CLLocationDegrees,
+                                                                                      longitude: pickupCoordinateArray[1] as! CLLocationDegrees),
+                                                   passengerKey: tripKey)
+                                self.present(pickupVC!, animated: true, completion: nil)
+                            }
+                            
+                        }
+                    })
+                }
+            }
+        }
     }
     
     func checkLocationAuthStatus() {
@@ -132,7 +156,11 @@ class HomeVC: UIViewController, Alertable {
     }
     
     @IBAction func actionBtnWasPressed(_ sender: UIButton) {
+        UpdateLocationService.instance.updateTripsWithCoordinatesUponRequest()
         actionBtn.animateButton(shouldLoad: true, withMessage: nil)
+        
+        self.view.endEditing(true)
+        destinationTextField.isUserInteractionEnabled = false
     }
     
     @IBAction func menuBtnWasPressed(_ sender: UIButton) {
@@ -200,7 +228,7 @@ extension HomeVC: MKMapViewDelegate {
         let search = MKLocalSearch(request: request)
         search.start { (response, error) in
             if error != nil {
-                self.showAlert(error?.localizedDescription)
+                self.showAlert("An error occured. Try again later.")
             } else if response!.mapItems.count == 0 {
                 self.showAlert("No results! Try again with another term.")
             } else {
@@ -234,7 +262,7 @@ extension HomeVC: MKMapViewDelegate {
         let directions = MKDirections(request: request)
         directions.calculate { (response, error) in
             guard let response = response else {
-                self.showAlert(error?.localizedDescription)
+                self.showAlert("An error occured. Try again later.")
                 return
             }
             self.route = response.routes[0]

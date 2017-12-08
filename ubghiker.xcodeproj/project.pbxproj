@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		199022CC1FDA78CD001FB628 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199022CB1FDA78CD001FB628 /* UIViewControllerExt.swift */; };
 		199022CE1FDA9460001FB628 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199022CD1FDA945F001FB628 /* Alertable.swift */; };
+		199022D01FDAA949001FB628 /* PickupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199022CF1FDAA949001FB628 /* PickupVC.swift */; };
+		199022D21FDAAAFA001FB628 /* RoundMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199022D11FDAAAFA001FB628 /* RoundMapView.swift */; };
 		19BC38271FD3001E00E3665E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BC38261FD3001E00E3665E /* AppDelegate.swift */; };
 		19BC38291FD3001E00E3665E /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BC38281FD3001E00E3665E /* HomeVC.swift */; };
 		19BC382C1FD3001F00E3665E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19BC382A1FD3001F00E3665E /* Main.storyboard */; };
@@ -37,6 +39,8 @@
 		07A882E01765516B8D753B1F /* Pods-ubghiker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ubghiker.release.xcconfig"; path = "Pods/Target Support Files/Pods-ubghiker/Pods-ubghiker.release.xcconfig"; sourceTree = "<group>"; };
 		199022CB1FDA78CD001FB628 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		199022CD1FDA945F001FB628 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
+		199022CF1FDAA949001FB628 /* PickupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupVC.swift; sourceTree = "<group>"; };
+		199022D11FDAAAFA001FB628 /* RoundMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundMapView.swift; sourceTree = "<group>"; };
 		19BC38231FD3001C00E3665E /* ubghiker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ubghiker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19BC38261FD3001E00E3665E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19BC38281FD3001E00E3665E /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 				19D0E8D61FD362A100BE4725 /* LeftSidePanelVC.swift */,
 				19D0E8D81FD3633500BE4725 /* ContainerVC.swift */,
 				19D0E8E01FD3904C00BE4725 /* LoginVC.swift */,
+				199022CF1FDAA949001FB628 /* PickupVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -135,6 +140,7 @@
 				19D0E8E21FD3928900BE4725 /* RoundedTextField.swift */,
 				19D0E8EB1FD47D2200BE4725 /* DriverAnnotation.swift */,
 				19E2F25E1FD4ACB700408ED6 /* PassengerAnnotation.swift */,
+				199022D11FDAAAFA001FB628 /* RoundMapView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -328,6 +334,8 @@
 				199022CE1FDA9460001FB628 /* Alertable.swift in Sources */,
 				19D0E8D91FD3633500BE4725 /* ContainerVC.swift in Sources */,
 				19D0E8DF1FD3793200BE4725 /* UIViewExt.swift in Sources */,
+				199022D01FDAA949001FB628 /* PickupVC.swift in Sources */,
+				199022D21FDAAAFA001FB628 /* RoundMapView.swift in Sources */,
 				19BC38291FD3001E00E3665E /* HomeVC.swift in Sources */,
 				19D0E8CF1FD351AC00BE4725 /* RoundImageView.swift in Sources */,
 				19D0E8D11FD352E700BE4725 /* RoundedShadowView.swift in Sources */,
