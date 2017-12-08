@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		199022CC1FDA78CD001FB628 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199022CB1FDA78CD001FB628 /* UIViewControllerExt.swift */; };
 		19BC38271FD3001E00E3665E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BC38261FD3001E00E3665E /* AppDelegate.swift */; };
 		19BC38291FD3001E00E3665E /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BC38281FD3001E00E3665E /* HomeVC.swift */; };
 		19BC382C1FD3001F00E3665E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19BC382A1FD3001F00E3665E /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		07A882E01765516B8D753B1F /* Pods-ubghiker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ubghiker.release.xcconfig"; path = "Pods/Target Support Files/Pods-ubghiker/Pods-ubghiker.release.xcconfig"; sourceTree = "<group>"; };
+		199022CB1FDA78CD001FB628 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		19BC38231FD3001C00E3665E /* ubghiker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ubghiker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19BC38261FD3001E00E3665E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19BC38281FD3001E00E3665E /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				19D0E8DE1FD3793200BE4725 /* UIViewExt.swift */,
+				199022CB1FDA78CD001FB628 /* UIViewControllerExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			files = (
 				19D0E8EA1FD4784100BE4725 /* UpdateLocationService.swift in Sources */,
 				19D0E8DC1FD3660000BE4725 /* CenterVCDelegate.swift in Sources */,
+				199022CC1FDA78CD001FB628 /* UIViewControllerExt.swift in Sources */,
 				19D0E8E81FD3A5EF00BE4725 /* DataService.swift in Sources */,
 				19D0E8D51FD3565D00BE4725 /* RoundedShadowButton.swift in Sources */,
 				19D0E8E11FD3904C00BE4725 /* LoginVC.swift in Sources */,

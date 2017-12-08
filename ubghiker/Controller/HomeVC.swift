@@ -30,6 +30,7 @@ class HomeVC: UIViewController {
     var matchingItems = [MKMapItem]()
     var currentUserId = Auth.auth().currentUser?.uid
     var selectedItemPlacemark: MKPlacemark?
+    var route: MKRoute!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +67,7 @@ class HomeVC: UIViewController {
     func centerMapOnUserLocation() {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
+        centerMapBtn.fadeTo(alphaValue: 0.0, withDuration: 0.2)
     }
     
     func loadDriverAnnotationsFromFirebase() {
@@ -114,8 +116,19 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func centerMapBtnWasPressed(_ sender: UIButton) {
-        centerMapOnUserLocation()
-        centerMapBtn.fadeTo(alphaValue: 0.0, withDuration: 0.2)
+        DataService.instance.REF_USERS.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let userSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for user in userSnapshot {
+                    if user.key == self.currentUserId! {
+                        if user.hasChild("tripCoordinate") {
+                            self.zoomOut(toFitAnnotationsfromMapView: self.mapView)
+                        } else {
+                            self.centerMapOnUserLocation()
+                        }
+                    }
+                }
+            }
+        })
     }
     
     @IBAction func actionBtnWasPressed(_ sender: UIButton) {
@@ -170,6 +183,14 @@ extension HomeVC: MKMapViewDelegate {
         centerMapBtn.fadeTo(alphaValue: 1.0, withDuration: 0.2)
     }
     
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let lineRenderer = MKPolylineRenderer(overlay: self.route.polyline)
+        lineRenderer.strokeColor = UIColor(red: 216/255, green: 71/255, blue: 30/255, alpha: 0.75)
+        lineRenderer.lineWidth = 3
+        zoomOut(toFitAnnotationsfromMapView: mapView)
+        return lineRenderer
+    }
+    
     func performSearch(searchTerm: String?) {
         matchingItems.removeAll()
         let request = MKLocalSearchRequest()
@@ -187,6 +208,7 @@ extension HomeVC: MKMapViewDelegate {
                     self.matchingItems.append(mapItem as MKMapItem)
                 }
                 self.tableView.reloadData()
+                self.shouldPresentLoadingView(false)
             }
         }
     }
@@ -201,6 +223,47 @@ extension HomeVC: MKMapViewDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
         mapView.addAnnotation(annotation)
+    }
+    
+    func setRouteResultsWithPolyline(forMapItem mapItem: MKMapItem) {
+        let request = MKDirectionsRequest()
+        request.source = MKMapItem.forCurrentLocation()
+        request.destination = mapItem
+        request.transportType = MKDirectionsTransportType.automobile
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { (response, error) in
+            guard let response = response else {
+                print(error.debugDescription)
+                return
+            }
+            self.route = response.routes[0]
+            self.mapView.add(self.route.polyline)
+            self.shouldPresentLoadingView(false)
+        }
+    }
+    
+    func zoomOut(toFitAnnotationsfromMapView mapView: MKMapView) {
+        guard mapView.annotations.count > 0 else { return }
+        
+        var topLeftCorner = CLLocationCoordinate2D(latitude: -90, longitude: 180)
+        var bottomRightCorner = CLLocationCoordinate2D(latitude: 90, longitude: -180)
+        
+        for annotation in mapView.annotations where !annotation.isKind(of: DriverAnnotation.self) {
+            topLeftCorner.longitude = fmin(topLeftCorner.longitude, annotation.coordinate.longitude)
+            topLeftCorner.latitude = fmax(topLeftCorner.latitude, annotation.coordinate.latitude)
+            bottomRightCorner.longitude = fmax(bottomRightCorner.longitude, annotation.coordinate.longitude)
+            bottomRightCorner.latitude = fmin(bottomRightCorner.latitude, annotation.coordinate.latitude)
+        }
+        
+        var region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(topLeftCorner.latitude - (topLeftCorner.latitude - bottomRightCorner.latitude) * 0.5,
+                                                                           topLeftCorner.longitude + (bottomRightCorner.longitude - topLeftCorner.longitude) * 0.5),
+                                        span: MKCoordinateSpan(latitudeDelta: fabs(topLeftCorner.latitude - bottomRightCorner.latitude) * 2.0,
+                                                               longitudeDelta: fabs(bottomRightCorner.longitude - topLeftCorner.longitude) * 2.0))
+        
+        region = mapView.regionThatFits(region)
+        mapView.setRegion(region, animated: true)
+        centerMapBtn.fadeTo(alphaValue: 0.0, withDuration: 0.2)
     }
 }
 
@@ -226,6 +289,7 @@ extension HomeVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == destinationTextField && destinationTextField.text != "" {
             performSearch(searchTerm: destinationTextField.text)
+            shouldPresentLoadingView(true)
             view.endEditing(true)
         }
         return true
@@ -245,6 +309,17 @@ extension HomeVC: UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         matchingItems.removeAll()
         tableView.reloadData()
+        
+        DataService.instance.REF_USERS.child(currentUserId!).child("tripCoordinate").removeValue()
+        
+        mapView.removeOverlays(mapView.overlays)
+        for annotation in mapView.annotations {
+            if let annotation = annotation as? MKPointAnnotation {
+                mapView.removeAnnotation(annotation)
+            } else if annotation.isKind(of: PassengerAnnotation.self) {
+                mapView.removeAnnotation(annotation)
+            }
+        }
         centerMapOnUserLocation()
         return true
     }
@@ -288,6 +363,8 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        shouldPresentLoadingView(true)
+        
         let passengerCoordinate = locationManager?.location?.coordinate
         let passengerAnnotation = PassengerAnnotation(coordinate: passengerCoordinate!, key: currentUserId!)
         mapView.addAnnotation(passengerAnnotation)
@@ -298,6 +375,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         DataService.instance.REF_USERS.child(currentUserId!).updateChildValues(["tripCoordinate": [selectedMapItem.placemark.coordinate.latitude,
                                                                                                    selectedMapItem.placemark.coordinate.longitude]])
         dropPinFor(placemark: selectedMapItem.placemark)
+        setRouteResultsWithPolyline(forMapItem: selectedMapItem)
         animateTableViewAppear(false)
     }
     
