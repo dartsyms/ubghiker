@@ -269,6 +269,20 @@ class HomeVC: UIViewController, Alertable {
                         self.actionBtn.animateButton(shouldLoad: false, withMessage: "DRIVER COMING")
                         self.actionBtn.isUserInteractionEnabled = false
                     })
+                    
+                    DataService.instance.REF_TRIPS.child(tripKey!).observeSingleEvent(of: .value, with: { (tripSnapshot) in
+                        if tripDict?["tripIsInProgress"] as? Bool == true {
+                            self.removeOverlaysAndAnnotations(forDrivers: true, forPassengers: true)
+                            let destinationCoordinateArray = tripDict?["destinationCoordinate"] as! NSArray
+                            let destinationaCoordinate = CLLocationCoordinate2D(latitude: destinationCoordinateArray[0] as! CLLocationDegrees,
+                                                                                longitude: destinationCoordinateArray[0] as! CLLocationDegrees)
+                            let destinationPlacemark = MKPlacemark(coordinate: destinationaCoordinate)
+                            self.dropPinFor(placemark: destinationPlacemark)
+                            self.setRouteResultsWithPolyline(forOriginMapItem: pickupMapItem,
+                                                             withDestinationMapItem: MKMapItem(placemark: destinationPlacemark))
+                            self.actionBtn.setTitle("ON TRIP", for: .normal)
+                        }
+                    })
                 })
             }
         })
@@ -345,11 +359,47 @@ class HomeVC: UIViewController, Alertable {
                 }
             })
         case .startTrip:
-            print("In startTrip")
+            DataService.instance.driverIsOnTrip(driverKey: self.currentUserId!, handler: { (isOnTrip, driverKey, tripKey) in
+                if isOnTrip! {
+                    self.removeOverlaysAndAnnotations(forDrivers: false, forPassengers: false)
+                    DataService.instance.REF_TRIPS.child(tripKey!).updateChildValues(["tripIsInProgress": true])
+                    DataService.instance.REF_TRIPS.child(tripKey!).child("destinationCoordinate").observeSingleEvent(of: .value, with: { (coordinateSnapshot) in
+                        let destinationCoordinateArray = coordinateSnapshot.value as! NSArray
+                        let destinationCoordinate = CLLocationCoordinate2D(latitude: destinationCoordinateArray[0] as! CLLocationDegrees,
+                                                                      longitude: destinationCoordinateArray[1] as! CLLocationDegrees)
+                        let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate)
+                        
+                        self.dropPinFor(placemark: destinationPlacemark)
+                        self.setRouteResultsWithPolyline(forOriginMapItem: nil,
+                                                         withDestinationMapItem: MKMapItem(placemark: destinationPlacemark))
+                        self.setCustomRegion(forAnnotationType: .destination,
+                                             withCoordinate: destinationCoordinate)
+                        self.actionForButton = .getDirectionsToDestination
+                        self.actionBtn.setTitle("GET DIRECTIONS", for: .normal)
+                    })
+                }
+            })
         case .getDirectionsToDestination:
-            print("In getDirectionsToDestination")
+            DataService.instance.driverIsOnTrip(driverKey: self.currentUserId!, handler: { (isOnTrip, driverKey, tripKey) in
+                if isOnTrip! {
+                    DataService.instance.REF_TRIPS.child(tripKey!).child("destinationCoordinate").observe(.value, with: { (snapshot) in
+                        let destinationCoordinateArray = snapshot.value as! NSArray
+                        let destinationCoordinate = CLLocationCoordinate2D(latitude: destinationCoordinateArray[0] as! CLLocationDegrees,
+                                                                           longitude: destinationCoordinateArray[1] as! CLLocationDegrees)
+                        let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate)
+                        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+                        destinationMapItem.name = "Passenger Destination"
+                        destinationMapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+                    })
+                }
+            })
         case .endTrip:
-            print("In endTrip")
+            DataService.instance.driverIsOnTrip(driverKey: self.currentUserId!, handler: { (isOnTrip, driverKey, tripKey) in
+                if isOnTrip! {
+                    UpdateLocationService.instance.cancelTrip(withPassengerKey: tripKey!, forDriverKey: driverKey!)
+                    self.setButtonsForDriver(hidden: true)
+                }
+            })
         }
     }
 }
@@ -367,10 +417,12 @@ extension HomeVC: CLLocationManagerDelegate {
         DataService.instance.driverIsOnTrip(driverKey: currentUserId!, handler: { (isOnTrip, driverKey, passengerKey) in
             if isOnTrip! {
                 if region.identifier == "pickup" {
+                    self.actionForButton = .startTrip
                     self.actionBtn.setTitle("START TRIP", for: .normal)
                 } else if region.identifier == "destination" {
                     self.cancelBtn.fadeTo(alphaValue: 0.0, withDuration: 0.2)
                     self.cancelBtn.isHidden = true
+                    self.actionForButton = .endTrip
                     self.actionBtn.setTitle("END TRIP", for: .normal)
                 }
             }
@@ -508,11 +560,7 @@ extension HomeVC: MKMapViewDelegate {
                 return
             }
             self.route = response.routes[0]
-            
-            if self.mapView.overlays.count == 0 {
-                self.mapView.add(self.route.polyline)
-            }
-            
+            self.mapView.add(self.route.polyline)
             self.zoomOut(toFitAnnotationsFromMapView: self.mapView,
                          forActiveTripWithDriver: false,
                          withKey: nil)
