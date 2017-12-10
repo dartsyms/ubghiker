@@ -183,9 +183,24 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0g-Gz-Je6">
+                                <rect key="frame" x="137" y="532" width="101" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="101" id="3B5-uX-sBL"/>
+                                    <constraint firstAttribute="height" constant="34" id="xF2-Kp-wqj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title="CANCEL TRIP">
+                                    <color key="titleColor" red="0.84705882349999995" green="0.2784313725" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelBtnWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3D2-o2-0pp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="d0g-Gz-Je6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="25J-2o-4Rk"/>
                             <constraint firstItem="6zL-qH-lq9" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="AzX-IK-bMU"/>
                             <constraint firstItem="6zL-qH-lq9" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="FHs-bM-16q"/>
                             <constraint firstItem="XhH-Hi-bJ2" firstAttribute="top" secondItem="eaf-z6-4AG" secondAttribute="bottom" constant="18" id="FJX-2N-NdY"/>
@@ -201,6 +216,7 @@
                             <constraint firstItem="kd1-ya-Hv8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="nz3-Nn-k2G"/>
                             <constraint firstItem="m2d-Fu-nF4" firstAttribute="top" secondItem="eaf-z6-4AG" secondAttribute="bottom" constant="8" id="ogl-ET-FUn"/>
                             <constraint firstItem="eaf-z6-4AG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="peM-9K-faT"/>
+                            <constraint firstItem="VRQ-OX-rfa" firstAttribute="top" secondItem="d0g-Gz-Je6" secondAttribute="bottom" constant="21" id="ppY-Xa-Q46"/>
                             <constraint firstItem="m2d-Fu-nF4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="q8H-PH-l8e"/>
                             <constraint firstItem="6zL-qH-lq9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="rOm-zG-sVc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XhH-Hi-bJ2" secondAttribute="trailing" constant="40" id="spd-gF-wGz"/>
@@ -212,6 +228,7 @@
                     </view>
                     <connections>
                         <outlet property="actionBtn" destination="3Xy-68-zor" id="1Tr-zP-cXH"/>
+                        <outlet property="cancelBtn" destination="d0g-Gz-Je6" id="Kyc-pZ-IO2"/>
                         <outlet property="centerMapBtn" destination="30z-yO-Ags" id="LWK-0F-guX"/>
                         <outlet property="destinationCircle" destination="1H8-A5-ZBQ" id="BoO-DS-iIy"/>
                         <outlet property="destinationTextField" destination="Fv1-YI-fOC" id="QCX-3x-OLs"/>
@@ -398,10 +415,10 @@
                                             </connections>
                                         </button>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4lN-J9-uv3">
-                                            <rect key="frame" x="17" y="153.5" width="340" height="360"/>
+                                            <rect key="frame" x="17" y="190.5" width="340" height="286"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hPJ-Cm-Au8">
-                                                    <rect key="frame" x="0.0" y="0.0" width="340" height="140"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="340" height="66"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x0O-Ks-hnO">
                                                             <rect key="frame" x="61.5" y="0.0" width="217" height="66"/>
@@ -421,9 +438,9 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIgn up or login to start requesting rides with UBGHKR: the easiest way to get a lift anywhere!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8Z-RZ-Uth">
-                                                            <rect key="frame" x="0.0" y="66" width="340" height="74"/>
+                                                            <rect key="frame" x="150.5" y="66" width="0.0" height="0.0"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="340" id="eTa-R0-OEV"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="340" id="eTa-R0-OEV"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -435,7 +452,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5N9-O0-QuL">
-                                                    <rect key="frame" x="0.0" y="160" width="340" height="41"/>
+                                                    <rect key="frame" x="0.0" y="86" width="340" height="41"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="vC6-Wd-CHI"/>
                                                     </constraints>
@@ -446,7 +463,7 @@
                                                     <color key="tintColor" red="0.84705882349999995" green="0.2784313725" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 </segmentedControl>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1sZ-W8-7Nd" customClass="RoundedCornerTextField" customModule="ubghiker" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="220" width="340" height="60"/>
+                                                    <rect key="frame" x="0.0" y="146" width="340" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="w35-bK-XfK"/>
                                                     </constraints>
@@ -455,7 +472,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zgG-Dt-b3z" customClass="RoundedCornerTextField" customModule="ubghiker" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="300" width="340" height="60"/>
+                                                    <rect key="frame" x="0.0" y="226" width="340" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="LkQ-Em-2d3"/>
                                                     </constraints>
